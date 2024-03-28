@@ -6,12 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <button id="buscar">Mostrar</button><br>
+    <input type="text" id="quantidade" placeholder="quantidade de primos..." width="300px">
+    <ol id="display">
+    </ol>
 </body>
-<script src="https://code.jquery.com/jquery-migrate-1.4.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <script>
     function primo(n) {
-        for (let c = 2;c < n;n++) {
+        for (let c = 2;c < n;c++) {
             if (n%c == 0 && n != c) {
                 return false
             }
@@ -21,16 +24,30 @@
     function primos (N) {
         let e = []
         let c = 2
-        while (c < N) {
+        while (e.length < N) {
+            console.log("->",c)
             if (primo(c)) {
                 e.push(c)
+                console.log("V",e)
+            } else {
+                console.log("X",e)
             }
-            c += 1;
+            c += 1
         }
         return e
     }
     $(document).ready(() => {
-        $("")
+        $("#buscar").click(function () {
+            let i = Number($("#quantidade").val())
+            console.log('input',i)
+            let lista = primos(i)
+            let text = "";
+            console.log(lista) 
+            lista.forEach((e) => {
+                text += `\t<li>${e}</li>\n`
+            })
+            $("#display").html(text)
+        })
     })
 </script>
 </html>
